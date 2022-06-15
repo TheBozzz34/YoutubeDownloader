@@ -1,13 +1,12 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import axios from 'axios'
-import qs from 'qs';
+import axios from "axios";
+import qs from "qs";
 
 import App from "./App.vue";
 import router from "./router";
 
 const app = createApp(App);
-
 
 app.use(createPinia());
 app.use(router);

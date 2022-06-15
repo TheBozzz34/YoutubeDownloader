@@ -28,7 +28,9 @@ app.post('/download', (req, res) => {
     var currentVid = vidCount++;
     console.log(currentVid)
 
-    exec('yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -P D:/YouTubeDownloaderHTML/express-app/uploads ' + finalUrl + " -o %(title)s.%(ext)s", (error, stdout, stderr) => {
+//%(title)s.%(ext)s
+
+    exec('yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -P D:/YouTubeDownloaderHTML/express-app/uploads ' + finalUrl + " -o " + currentVid +  ".%(ext)s", (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
             return;

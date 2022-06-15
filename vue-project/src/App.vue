@@ -1,28 +1,26 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "@/components/HelloWorld.vue";
+var count: 0;
 </script>
+
+<script lang="ts">
+export default {
+  data() {
+    return {
+      counter: 0,
+    };
+  },
+};
+</script>
+
 
 <template>
   <p>
     Enter post value for url
-
-
-    <br>
-    <input type="text" id="video-input" name="video-input"> <button id="video-input-button">send request</button>
-
-
-    <br>
-    Downloaded videos are avalable at http://localhost:3001/uploads/(video title).mp4
-
+    <br />
+    <input type="text" id="video-input" name="video-input" />
+    <button id="video-input-button" @click="counter++">send request</button>
   </p>
-
-  
-  
-  
-  
-  
-
+	<p>Your video is avalable at http://localhost:3001/uploads/{{ counter }}.mp4</p>
 </template>
 
 <style>
