@@ -7,3 +7,6 @@ A very simple browser based youtube video downloader. Frontend written in Vue an
 Latest prerelease can be found [here](https://github.com/TheBozzz34/YoutubeDownloader/releases/tag/1.0)
 
 ![img](https://cdn.upload.systems/uploads/zUn9gUlj.png)
+
+Upcoming Features:
+- DataBase integration with list of links
