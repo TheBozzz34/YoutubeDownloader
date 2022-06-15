@@ -14,26 +14,22 @@ app.use(router);
 
 app.mount("#app");
 
-
-
-
-const el = document.getElementById("video-input-button")
+const el = document.getElementById("video-input-button");
 // @ts-ignore: Object is possibly 'null'.
 el.addEventListener("click", download);
 
 function download() {
+  const vidurl = (<HTMLInputElement>document.getElementById("video-input"))
+    .value;
+  axios({
+    method: "POST",
+    url: "http://localhost:3001/download",
+    data: qs.stringify({
+      url: vidurl,
+    }),
+  });
 
-    var vidurl = (<HTMLInputElement>document.getElementById("video-input")).value;
-    axios({
-        method: 'POST',
-        url: 'http://localhost:3001/download',
-        data: qs.stringify({
-          url: vidurl,
-        }),
-      });
-
-    
-    /*
+  /*
       async function postData() {
 
         var vidurl = (<HTMLInputElement>document.getElementById("video-input")).value;
@@ -71,8 +67,4 @@ function download() {
       
       postData();
     */
-   
 }
-
-
-

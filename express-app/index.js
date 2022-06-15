@@ -16,6 +16,8 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.options('*', cors())
 
+var vidCount = "1";
+
 app.post('/download', (req, res) => {
     //console.log('Got body:', req.body);
     str = JSON.stringify(req.body);
@@ -23,8 +25,10 @@ app.post('/download', (req, res) => {
     console.log( "Starting download of " + result.url)
     var finalUrl = result.url
     res.sendStatus(200);
+    var currentVid = vidCount++;
+    console.log(currentVid)
 
-    exec('yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -P D:/YouTubeDownloaderHTML/express-app/uploads ' + finalUrl, (error, stdout, stderr) => {
+    exec('yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -P D:/YouTubeDownloaderHTML/express-app/uploads ' + finalUrl + " -o %(title)s.%(ext)s", (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
             return;

@@ -11,6 +11,10 @@ import HelloWorld from "@/components/HelloWorld.vue";
     <br>
     <input type="text" id="video-input" name="video-input"> <button id="video-input-button">send request</button>
 
+
+    <br>
+    Downloaded videos are avalable at http://localhost:3001/uploads/(video title).mp4
+
   </p>
 
   
