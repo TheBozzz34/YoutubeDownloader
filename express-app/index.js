@@ -27,10 +27,12 @@ app.post('/download', (req, res) => {
     res.sendStatus(200);
     var currentVid = vidCount++;
     console.log(currentVid)
+    const folder_name = result.folder;
+    console.log(folder_name)
 
 //%(title)s.%(ext)s
 
-    exec('yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -P D:/YouTubeDownloaderHTML/express-app/uploads ' + finalUrl + " -o " + currentVid +  ".%(ext)s", (error, stdout, stderr) => {
+    exec('yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -P ' + folder_name +  ' ' + finalUrl + " -o " + currentVid +  ".%(ext)s", (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
             return;

@@ -17,14 +17,19 @@ const el = document.getElementById("video-input-button");
 // @ts-ignore: Object is possibly 'null'.
 el.addEventListener("click", download);
 
+const txt_input = document.getElementById("folder") as HTMLInputElement | null;
+
 function download() {
   const vidurl = (<HTMLInputElement>document.getElementById("video-input"))
     .value;
+  const folder_value = txt_input?.value;
+  console.log(folder_value);
   axios({
     method: "POST",
     url: "http://localhost:3001/download",
     data: qs.stringify({
       url: vidurl,
+      folder: folder_value,
     }),
   });
 

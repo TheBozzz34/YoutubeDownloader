@@ -18,9 +18,13 @@ export default {
     Enter post value for url
     <br />
     <input type="text" id="video-input" name="video-input" />
+  
     <button id="video-input-button" @click="counter++">send request</button>
+    <br />
+    Destination folder, use absolute path and put quotes around it
   </p>
-	<p>Your video is avalable at http://localhost:3001/uploads/{{ counter }}.mp4</p>
+  <br />
+	<input type="text" id="folder" name="folder">
 </template>
 
 <style>
