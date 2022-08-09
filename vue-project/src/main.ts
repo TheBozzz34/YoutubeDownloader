@@ -18,13 +18,18 @@ const el = document.getElementById("video-input-button");
 el.addEventListener("click", download);
 
 const txt_input = document.getElementById("folder") as HTMLInputElement | null;
-const id_input = document.getElementById("id") as HTMLInputElement | null;
+
+
+function randint(low:number, max?:number) {
+  return Math.floor(Math.random() * 10) % (max ?? low) + (max ? low : 0);
+}
 
 function download() {
   const vidurl = (<HTMLInputElement>document.getElementById("video-input"))
     .value;
   const folder_value = txt_input?.value;
-  const id_value = id_input?.value;
+  
+  const id_value = randint(1,2000);
   console.log(folder_value);
   axios({
     method: "POST",
@@ -35,6 +40,10 @@ function download() {
       id: id_value,
     }),
   });
+
+  alert("Your unique video ID is " + id_value + ", remember it!");
+
+  
 
   /*
       async function postData() {

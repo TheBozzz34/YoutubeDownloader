@@ -5,6 +5,7 @@ const { exec } = require("child_process");
 const path = require('path')
 const getVideoId = require('get-video-id');
 const urlParser = require ('js-video-url-parser');
+var serveIndex = require('serve-index');
 
 var public = path.join(__dirname, 'uploads');
 // use it before all route definitions
@@ -32,9 +33,7 @@ app.post('/download', (req, res) => {
     //console.log(currentVid)
     const folder_name = result.folder;
     //console.log(folder_name)
-    function getRandomInt(max) {
-      return Math.floor(Math.random() * max);
-    }
+    
 
     const id = result.id;
     console.log(id)
@@ -43,9 +42,11 @@ app.post('/download', (req, res) => {
     
     function download() {
         //const folder_id = (getRandomInt(2000))
-        const folder_id = id;
+        const video_id = id;
+        var serverPath = path.resolve(process.cwd() + '/../express-app/uploads');
+        console.log(serverPath) 
 
-        exec('yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -P "' + folder_name + '/' +  folder_id + '" ' + finalUrl + ' -o ' +  "%(id)s.%(ext)s", (error, stdout, stderr) => {
+        exec('yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -P "' + serverPath + '" ' + finalUrl + ' -o ' +  video_id + ".%(ext)s", (error, stdout, stderr) => {
           if (error) {
               console.log(`error: ${error.message}`);
               return;
@@ -92,6 +93,5 @@ app.listen(3001, function (err) {
 });
 
 app.use('/uploads', express.static(public));
-
   console.log('Server started on port 3001')
 })

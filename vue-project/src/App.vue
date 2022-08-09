@@ -21,14 +21,9 @@ export default {
   
     <button id="video-input-button" @click="counter++">send request</button>
     <br />
-    Destination folder, use absolute path and put quotes around it
   </p>
   <br />
-	<input type="text" id="folder" name="folder">
-  <br />
-  <p>unique name for the video, no spaces, no special characters</p> 
-  <br />
-  <input type="text" id="id" name="id">
+	
   
 </template>
 
