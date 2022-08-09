@@ -18,11 +18,13 @@ const el = document.getElementById("video-input-button");
 el.addEventListener("click", download);
 
 const txt_input = document.getElementById("folder") as HTMLInputElement | null;
+const id_input = document.getElementById("id") as HTMLInputElement | null;
 
 function download() {
   const vidurl = (<HTMLInputElement>document.getElementById("video-input"))
     .value;
   const folder_value = txt_input?.value;
+  const id_value = id_input?.value;
   console.log(folder_value);
   axios({
     method: "POST",
@@ -30,6 +32,7 @@ function download() {
     data: qs.stringify({
       url: vidurl,
       folder: folder_value,
+      id: id_value,
     }),
   });
 

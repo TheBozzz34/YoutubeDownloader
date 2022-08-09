@@ -25,6 +25,11 @@ export default {
   </p>
   <br />
 	<input type="text" id="folder" name="folder">
+  <br />
+  <p>unique name for the video, no spaces, no special characters</p> 
+  <br />
+  <input type="text" id="id" name="id">
+  
 </template>
 
 <style>

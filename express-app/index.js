@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 var cors = require('cors');
 const { exec } = require("child_process");
 const path = require('path')
+const getVideoId = require('get-video-id');
+const urlParser = require ('js-video-url-parser');
 
 var public = path.join(__dirname, 'uploads');
 // use it before all route definitions
@@ -16,23 +18,53 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.options('*', cors())
 
-var vidCount = "1";
+//var vidCount = "1";
 
 app.post('/download', (req, res) => {
     //console.log('Got body:', req.body);
     str = JSON.stringify(req.body);
     var result = JSON.parse(str);
-    console.log( "Starting download of " + result.url)
+    //console.log( "Starting download of " + result.url)
     var finalUrl = result.url
+    //console.log('url = ' + finalUrl)
     res.sendStatus(200);
-    var currentVid = vidCount++;
-    console.log(currentVid)
+    //var currentVid = vidCount++;
+    //console.log(currentVid)
     const folder_name = result.folder;
-    console.log(folder_name)
+    //console.log(folder_name)
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
+
+    const id = result.id;
+    console.log(id)
 
 //%(title)s.%(ext)s
+    
+    function download() {
+        //const folder_id = (getRandomInt(2000))
+        const folder_id = id;
 
-    exec('yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -P ' + folder_name +  ' ' + finalUrl + " -o " + currentVid +  ".%(ext)s", (error, stdout, stderr) => {
+        exec('yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -P "' + folder_name + '/' +  folder_id + '" ' + finalUrl + ' -o ' +  "%(id)s.%(ext)s", (error, stdout, stderr) => {
+          if (error) {
+              console.log(`error: ${error.message}`);
+              return;
+          }
+          if (stderr) {
+              console.log(`stderr: ${stderr}`);
+              return;
+          }
+          console.log(`stdout: ${stdout}`);
+      });
+    }
+
+    download();
+
+      /* 
+      videoID = "113123344"
+
+    //exec('yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -P ' + folder_name +  ' ' + finalUrl + " -o " + currentVid +  ".%(ext)s", (error, stdout, stderr) => {
+      exec('yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -P "' + folder_name + '/' +  videoID + '" ' + finalUrl + ' -o ' + videoID +  ".%(ext)s", (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
             return;
@@ -43,6 +75,8 @@ app.post('/download', (req, res) => {
         }
         console.log(`stdout: ${stdout}`);
     });
+
+    */
 
 });
 
